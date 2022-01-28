@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "444493663681",
+    "project_id": "myshirteg",
+    "storage_bucket": "myshirteg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444493663681:android:1ec8ee6c13bc76e86ab340",
+        "android_client_info": {
+          "package_name": "com.myshirt.eg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444493663681-dc27lp99bd4fe2qr58406ge370c9h29i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRKuMrK0tQro06O8a7Z0q8eCloYro1phU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444493663681-dc27lp99bd4fe2qr58406ge370c9h29i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

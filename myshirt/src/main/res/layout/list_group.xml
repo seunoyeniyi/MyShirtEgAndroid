@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/groupIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        app:srcCompat="@drawable/icons8_star_1"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/listTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="start|left"
+        android:paddingLeft="0dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAppearance="@style/MontserratTextViewStyle"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        tools:ignore="RtlHardcoded,RtlSymmetry"
+        tools:text="@android:string/untitled" />
+
+    <ImageView
+        android:id="@+id/groupChevron"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:contentDescription="@string/image"
+        app:srcCompat="@drawable/icons8_plus_math_6"
+        tools:ignore="VectorDrawableCompat" />
+</LinearLayout>

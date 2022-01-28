@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/white_card_radius"
+        android:orientation="vertical"
+        android:padding="1dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_selector_white_radius"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <View
+                android:id="@+id/titleView"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/shim_background" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_to_cart_selector"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:duplicateParentState="true"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:layout_weight="6" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/wishListToggle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:padding="5dp"
+            app:srcCompat="@drawable/icons8_heart_9"
+            app:tint="@color/shim_background"
+            tools:ignore="VectorDrawableCompat" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/white_card_radius"
+        android:orientation="vertical"
+        android:padding="1dp"
+        tools:ignore="UseCompoundDrawables">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_selector_white_radius"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <View
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/shim_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/shim_background" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_to_cart_selector"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:duplicateParentState="true"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@string/add_to_cart"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:layout_weight="6" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:clickable="true"
+            android:padding="5dp"
+            app:srcCompat="@drawable/icons8_heart_9"
+            app:tint="@color/shim_background"
+            tools:ignore="VectorDrawableCompat" />
+
+    </RelativeLayout>
+
+</LinearLayout>

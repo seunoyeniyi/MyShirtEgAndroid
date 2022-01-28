@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp">
+
+    <EditText
+        android:id="@+id/searchBarEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="Search"
+        android:background="@drawable/input_primary"
+        android:drawableStart="@drawable/icons8_search_20px_2"
+        android:drawableLeft="@drawable/icons8_search_20px_2"
+        android:drawablePadding="20dp"
+        android:ems="10"
+        android:hint="@string/search_on_bgkmart"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textColorHint="#808080"
+        android:textSize="14sp" />
+</androidx.appcompat.widget.Toolbar>

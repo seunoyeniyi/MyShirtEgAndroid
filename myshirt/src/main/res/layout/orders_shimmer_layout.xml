@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:id="@+id/orderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_border_radius"
+        android:clickable="true"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/textViewOrderCode"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:background="@color/shim_background"/>
+
+        <View
+            android:id="@+id/orderCode"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/textViewOrderCode"
+            android:layout_marginTop="5dp"
+            android:background="@color/shim_background" />
+
+        <View
+            android:id="@+id/orderDate"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/orderCode"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/shim_background" />
+
+        <View
+            android:id="@+id/textViewPaymentMethod"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/orderDate"
+            android:background="@color/shim_background" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewPaymentMethod"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/paymentMethod"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/shim_background" />
+
+            <View
+                android:id="@+id/paymentStatusIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/shim_background" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/orderAmount"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/shim_background" />
+
+    </RelativeLayout>
+
+</LinearLayout>

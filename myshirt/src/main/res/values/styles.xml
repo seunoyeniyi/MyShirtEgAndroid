@@ -1,0 +1,47 @@
+<resources>
+
+    <!--    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">-->
+    <!--        <item name="color">@color/white</item>-->
+    <!--    </style>-->
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="behavior_draggable">false</item>
+    </style>
+
+    <style name="Widget.Theme.PhuckBrand.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/primary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/primary</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f
+        </item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#878787</item>
+        <item name="colorControlActivated">@color/primary</item>
+    </style>
+    <style name="RatingBarAdapter" parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">#878787</item>
+        <item name="colorControlActivated">@color/primary</item>
+    </style>
+
+</resources>

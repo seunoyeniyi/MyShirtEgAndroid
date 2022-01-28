@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    <color name="purple_500">#FF6200EE</color>-->
+    <color name="purple_500">#000000</color>
+    <color name="primary">#000000</color>
+    <color name="primary_light">#202020</color>
+    <color name="purple_700">#494949</color>
+    <color name="secondary">#B24725</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#333E48</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="hover_grey">#ECECEC</color>
+    <color name="red">#FF0000</color>
+    <color name="f1">#F1F1F1</color>
+    <color name="hover">#C5C5C5</color>
+
+    <color name="shim_background">#dddddd</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+</resources>

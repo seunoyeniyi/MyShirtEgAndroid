@@ -1,0 +1,111 @@
+<resources>
+    <string name="app_name">MyShirt Eg</string>
+    <string name="title_home">Home</string>
+    <string name="logo">Logo</string>
+    <string name="shop">Shop</string>
+    <string name="profile">Profile</string>
+    <string name="image">Image</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="product_title_sample">Embroidered Champion Backpack – PHUCK LOGO</string>
+    <string name="product_price_sample">Rs44.5</string>
+    <string name="product_description_sample">This small size Champion backpack is the perfect choice for running all sorts of daily errands or doing sports! There’s plenty of space for all your necessities, as well as separate pockets for your phone, passport, water bottle and laptop. It’s also water-resistant, so your belongings are sure to stay dry in any weather.  • Top part: 100% polyester, 600D • Bottom part: 100% polyester, 900D • Dimensions: 18″ × 11½″ × 6¼” (45.7 × 29.2 × 15.9 cm) • Product weight: 1.02 lbs (464 g) • Capacity: 5.5 gallons (21 l) • Max weight: 33 lbs (15 kg) • Large inside pocket with a 15″ laptop sleeve • Water-resistant • 2 slip side pockets for water bottles • Front zip pocket with embroidered Champion brand logo, containing an organizational compartment (a pocket with zip closure, 2 pouches for phone and passport, and 3 pen holders) • Top carry handle • Top zipper with 2 sliders and zipper pullers • Soft, padded mesh back with Champion brand logo • Padded ergonomic polyester bag straps with plastic strap regulators and Champion brand label on the left strap.</string>
+    <string name="related_products">Related Products</string>
+    <string name="cart">Cart</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="remove">Remove</string>
+    <string name="coupon_code">Coupon Code if Any</string>
+    <string name="total">Total</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="continue_shopping">Continue Shopping</string>
+    <string name="jane">Jane</string>
+    <string name="my_orders">My Orders</string>
+    <string name="pending_payments">Pending Payments</string>
+    <string name="finished_orders">Finished Orders</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="about_us">About us</string>
+    <string name="log_out">Log out</string>
+    <string name="zero_price">0.00</string>
+    <string name="number_zero">0</string>
+    <string name="zero_price_sample">Rs0.00</string>
+    <string name="details">Details</string>
+    <string name="refresh">Refresh</string>
+    <string name="label">Label</string>
+    <string name="category">Category</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username_or_email">Username or email</string>
+    <string name="password">Password</string>
+    <string name="have_an_account">Already have an account?</string>
+    <string name="dont_have_account">Don\'t have account?</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="fname">First name</string>
+    <string name="lname">Last name</string>
+    <string name="company">Company</string>
+    <string name="street_address">Street Address</string>
+    <string name="house_number">House number and street name</string>
+    <string name="aparment_optional">Aparment, suite, unit etc. (Optional)</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="phone">Phone</string>
+    <string name="email_address">Email Address</string>
+    <string name="save">Save</string>
+    <string name="country">Country</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="continue_text">Continue</string>
+    <string name="postcode">Post code</string>
+    <string name="proceed_to_payement">Proceed to Payment</string>
+    <string name="your_order">Your Order</string>
+    <string name="shipping">Shipping</string>
+    <string name="your_address">Your Address</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="confirm_and_pay">Confirm &amp; Pay</string>
+    <string name="order_place_info">Your order has been placed!</string>
+    <string name="apply">Apply</string>
+    <string name="coupon">Coupon</string>
+    <string name="question_mark">\?</string>
+    <string name="pending_delivery">Pending Delivery</string>
+    <string name="this_will_be_your_delivery_address">This will be your delivery address</string>
+    <string name="order_details">Order details</string>
+    <string name="discount">Discount</string>
+    <string name="search_on_bgkmart">Search on MyShirtEg…</string>
+    <string name="filter">Filter</string>
+    <array name="initial_range">
+        <item>1000</item>
+        <item>14000</item>
+    </array>
+    <string name="price">Price</string>
+
+
+    <string name="facebook_app_id">3117006808511978</string>
+    <string name="fb_login_protocol_scheme">fb3117006808511978</string>
+
+
+    <string name="or">Or</string>
+    <string name="create_username_to_continue">Create username to continue</string>
+    <string name="flat_rate">Flat Rate</string>
+    <string name="local_pickup">Local Pickup</string>
+    <string name="free_shipping">Free Shipping</string>
+    <string name="confirm_loaction">Confirm Location</string>
+    <string name="select_from_map">Select from Google map</string>
+    <string name="title_activity_search">Search</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="credit_cards">Credit Cards</string>
+    <string name="pay">Pay</string>
+    <string name="paypal_or_cards">PayPal or Credit Cards</string>
+
+    <!-- Strings used for fragments for navigation -->
+
+
+    <string name="categories">Categories</string>
+    <string name="search">Search</string>
+    <string name="account">Account</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+</resources>

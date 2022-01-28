@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <View
+                android:id="@+id/cartImage"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+                android:background="@color/shim_background" />
+
+
+            <View
+                android:id="@+id/cartProductTitle"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/cartImage"
+                android:background="@color/shim_background" />
+
+            <View
+                android:id="@+id/cartProductPrice"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/cartProductTitle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/cartImage"
+                android:background="@color/shim_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/cartImage"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@id/cartImage"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/minusBtn"
+                        android:layout_width="34dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@color/shim_background" />
+
+                    <TextView
+                        android:id="@+id/cartProductQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="1"
+                        android:textColor="@color/shim_background"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/plusBtn"
+                        android:layout_width="41dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@color/shim_background" />
+
+                    <View
+                        android:id="@+id/removeBtn"
+                        android:layout_width="79dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                       android:background="@color/shim_background" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.bgkmart.bgkmart">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name="androidx.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PhuckBrand"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+
+
+        <activity android:name="com.fatima.fabric.ui.StripeWebPay" />
+        <activity android:name="com.fatima.fabric.BrowserActivity" />
+        <activity android:name="com.fatima.fabric.ui.OrderActivity" />
+        <activity android:name="com.fatima.fabric.ui.ProfileAddressActivity" />
+        <activity android:name="com.fatima.fabric.ui.OrdersActivity" />
+        <activity android:name="com.fatima.fabric.ui.RegisterActivity" />
+        <activity android:name="com.fatima.fabric.ui.OrderPlacedActivity" />
+        <activity android:name="com.fatima.fabric.ui.PaymentActivity" />
+        <activity android:name="com.fatima.fabric.ui.AddressActivity" />
+        <activity android:name="com.fatima.fabric.ui.LoginActivity" />
+        <activity android:name="com.fatima.fabric.CheckoutActivity" />
+        <activity
+            android:name="com.fatima.fabric.ArchiveActivity"
+            android:theme="@style/Theme.PhuckBrand.NoActionBar" />
+        <activity android:name="com.fatima.fabric.WebPageViewer" />
+        <activity
+            android:name="com.fatima.fabric.ProductActivity"
+            android:theme="@style/Theme.PhuckBrand.NoActionBar" />
+        <activity android:name="com.fatima.fabric.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.fatima.fabric.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.PhuckBrand">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+    </application>
+
+</manifest>

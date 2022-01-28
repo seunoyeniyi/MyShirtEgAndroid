@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.myshirt.eg.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.myshirt.eg.ui.categories.CategoriesFragment"
+        android:label="@string/categories"
+        tools:layout="@layout/fragment_categories" />
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.myshirt.eg.ui.cart.CartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.myshirt.eg.ui.search.SearchFragment"
+        android:label="@string/shop"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.myshirt.eg.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
+<!--    OTHER APP FRAGMENTS-->
+    <fragment
+        android:id="@+id/shop_fragment"
+        android:name="com.myshirt.eg.ui.shop.ShopFragment"
+        android:label="@string/shop"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/archive_fragment"
+        android:name="com.myshirt.eg.ArchiveFragment"
+        android:label="@string/category"
+        tools:layout="@layout/fragment_archive" />
+    <fragment
+        android:id="@+id/product_fragment"
+        android:name="com.myshirt.eg.ProductFragment"
+        android:label="@string/details"
+        tools:layout="@layout/fragment_product" />
+    <fragment
+        android:id="@+id/orders_fragment"
+        android:name="com.myshirt.eg.ui.OrdersFragment"
+        android:label="@string/my_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/wishlist_fragment"
+        android:name="com.myshirt.eg.ui.WishListFragment"
+        android:label="@string/wishlist"
+        tools:layout="@layout/fragment_wish_list" />
+
+</navigation>
