@@ -35,7 +35,7 @@ public class Site {
     public static final String SEARCH = ADDRESS + "wp-json/skye-api/v1/search/";
     public static final String ADD_REVIEW = ADDRESS + "wp-json/skye-api/v1/add-review/";
 
-    public static final String CURRENCY = "₹";
+    public static final String CURRENCY = "EGP";
     public static String payment_method_title(String slug) {
         String title = "";
         switch (slug) {

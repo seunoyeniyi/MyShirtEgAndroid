@@ -708,7 +708,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
         }
 //        Log.e("params: ", params.toString());
         if (noneIsEmpty) {
-            new GetVariationPriceView(requireContext(), product_id, params.toString(), variationPriceView, priceVariationProgressBar, addToCartBtn, hiddenVariationIdView);
+            new GetVariationPriceView(requireContext(), parent_id, params.toString(), variationPriceView, priceVariationProgressBar, addToCartBtn, hiddenVariationIdView);
         }
 
     }

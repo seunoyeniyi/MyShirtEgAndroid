@@ -31,6 +31,7 @@ import com.myshirt.eg.handler.AddToCartWithUpdateCartCount;
 import com.myshirt.eg.handler.PriceFormatter;
 import com.bumptech.glide.Glide;
 import com.myshirt.eg.handler.UserSession;
+import com.myshirt.eg.ui.AttributeBottomSheet;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +48,9 @@ public class ProductGridAdapter extends BaseAdapter {
     UserSession userSession;
     TextView cartCounter;
     int cardResource = R.layout.single_product_card;
+
+    AttributeBottomSheet attributeBottomSheet;
+
     public ProductGridAdapter(Context context, ArrayList<ProductList> productLists, TextView cartCounter) {
         this.context = context;
         this.productLists = productLists;
@@ -164,16 +168,23 @@ public class ProductGridAdapter extends BaseAdapter {
 //        TextView cartTextView = (TextView) rowView.findViewById(R.id.cartTextView);
 //        addToCartProgressBar.setVisibility(View.GONE)
 
+
+
         if (productLists.get(position).getProduct_type().equals("variable") || productLists.get(position).getType().equals("variable")) {
             //setup as variable product
             addToCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    openProductActivity(productLists.get(position).getId(),
-                            productLists.get(position).getImage(),
-                            productLists.get(position).getName(),
-                            productLists.get(position).getDescription(),
-                            productLists.get(position).getIn_wish_list());
+                    attributeBottomSheet = new AttributeBottomSheet(context, cartCounter, productLists.get(position));
+                    if (!attributeBottomSheet.isAdded()) { //to avoid crashing with double touch
+                        attributeBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "Select");
+                    }
+
+//                    openProductActivity(productLists.get(position).getId(),
+//                            productLists.get(position).getImage(),
+//                            productLists.get(position).getName(),
+//                            productLists.get(position).getDescription(),
+//                            productLists.get(position).getIn_wish_list());
                 }
             });
         } else {

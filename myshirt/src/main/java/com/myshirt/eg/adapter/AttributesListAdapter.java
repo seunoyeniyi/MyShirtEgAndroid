@@ -74,7 +74,7 @@ public class AttributesListAdapter extends BaseAdapter {
         Spinner spinner = rowView.findViewById(R.id.attributeSpinner);
         RecyclerView swatch = rowView.findViewById(R.id.attributeSwatch);
 
-        if (attributesList.get(position).getLabel().toLowerCase().equals("size")) {
+        if (attributesList.get(position).getLabel().toLowerCase().equals("sizexxxxxx")) {
             swatch.setVisibility(View.VISIBLE);
             spinner.setVisibility(View.GONE);
         } else {
@@ -89,10 +89,10 @@ public class AttributesListAdapter extends BaseAdapter {
 
         try {
             JSONArray array = attributesList.get(position).getOptions();
-            //reverse loop
-            for (int i = array.length() - 1; i >= 0; i--) {
+
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject option = new JSONObject((array.getString(i)));
-                Log.e("Attr Name", option.getString("value"));
+//                Log.e("Attr Name", option.getString("value"));
                 options.add(new OptionList(option.getString("name"), option.getString("value")));
                 swatchOptions.add(new OptionList(option.getString("name"), option.getString("value")));
             }
@@ -106,7 +106,7 @@ public class AttributesListAdapter extends BaseAdapter {
         labelView.setText(Html.fromHtml(label.substring(0, 1).toUpperCase() + label.substring(1)));
 
 
-        if (attributesList.get(position).getLabel().toLowerCase().equals("size")) {
+        if (attributesList.get(position).getLabel().toLowerCase().equals("sizexxxxxx")) {
             SwatchesAdapter adapter = new SwatchesAdapter(swatchOptions);
             swatch.setAdapter(adapter);
             swatch.setLayoutManager(new GridLayoutManager(context, 5));

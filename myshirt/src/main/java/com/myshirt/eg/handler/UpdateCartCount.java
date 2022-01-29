@@ -35,6 +35,7 @@ public class UpdateCartCount {
               //handle error
         });
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
