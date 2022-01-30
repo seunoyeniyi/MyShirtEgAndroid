@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.kofigyan.stateprogressbar.StateProgressBar;
+import com.myshirt.eg.MapsActivity;
 import com.myshirt.eg.R;
 import com.myshirt.eg.Site;
 import com.myshirt.eg.adapter.OrderDetailsAdapter;
@@ -227,12 +229,13 @@ public class OrderActivity extends AppCompatActivity {
                                 } else {
                                     checkout_url += "&sk-web-payment=1&sk-user-checkout=" + userSession.userID; //for any payment method
                                 }
-                                checkout_url += "&in_sk_app=1";
-                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button, *notificationx-frontend-root";
+//                                checkout_url += "&in_sk_app=1";
+//                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button, *notificationx-frontend-root";
 //                                Log.e("URL", checkout_url);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+//                            Log.e("URL", checkout_url);
                             startActivity(new Intent(OrderActivity.this, StripeWebPay.class).putExtra("url", checkout_url));
                         }
                     });
@@ -280,17 +283,17 @@ public class OrderActivity extends AppCompatActivity {
 
 
                 //IN THIS APP - WE ARE USING ZOREM WP ADVANCE SHIPMENT PLUGIN
-                if (object.has("zorem_tracking_items")) {
-                    JSONArray shipping_items = object.getJSONArray("zorem_tracking_items");
-                    if (shipping_items.length() > 0) {
-                        trackingAvailable = true;
-                        shipment = shipping_items.getJSONObject(0); //use the first tracking item
-                        tracking_provider.setText(Html.fromHtml("Tracking Provider: <b>" + shipment.getString("formatted_tracking_provider") + "</b>"));
-                        tracking_number.setText(Html.fromHtml("Tracking Number: <b>" + shipment.getString("tracking_number") + "</b>"));
-                        tracking_provider.setVisibility(View.VISIBLE);
-                        tracking_number.setVisibility(View.VISIBLE);
-                    }
-                }
+//                if (object.has("zorem_tracking_items")) {
+//                    JSONArray shipping_items = object.getJSONArray("zorem_tracking_items");
+//                    if (shipping_items.length() > 0) {
+//                        trackingAvailable = true;
+//                        shipment = shipping_items.getJSONObject(0); //use the first tracking item
+//                        tracking_provider.setText(Html.fromHtml("Tracking Provider: <b>" + shipment.getString("formatted_tracking_provider") + "</b>"));
+//                        tracking_number.setText(Html.fromHtml("Tracking Number: <b>" + shipment.getString("tracking_number") + "</b>"));
+//                        tracking_provider.setVisibility(View.VISIBLE);
+//                        tracking_number.setVisibility(View.VISIBLE);
+//                    }
+//                }
 
                 viewLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -298,39 +301,39 @@ public class OrderActivity extends AppCompatActivity {
 
                         try {
 
-                            //THIS APP IS USING ZOREM WP ADVANCE SHIPMENT PLUGIN -- skye driver will be comment out
+
                             //for skye driver method
-//                            if (!object.getString("skye_driver_location").isEmpty()) {
-//                                JSONObject driver_location = new JSONObject(object.getString("skye_driver_location"));
-//                                String address = driver_location.getString("address");
-//                                String latitude = driver_location.getString("latitude");
-//                                String longitude = driver_location.getString("longitude");
-//
-//                                //to avoid app crash of empty string
-//                                Intent mapIntent = new Intent(OrderActivity.this, MapsActivity.class);
-//                                if (!address.isEmpty()) {
-//                                    mapIntent.putExtra("address", address);
-//                                    trackingAvailable = true;
-//                                }
-//                                if (!latitude.isEmpty() && !longitude.isEmpty()) {
-//                                    mapIntent.putExtra("latitude", longitude);
-//                                    mapIntent.putExtra("longitude", longitude);
-//                                    trackingAvailable = true;
-//                                }
-//                                if (trackingAvailable)
-//                                    startActivity(mapIntent);
-//                            }
+                            if (!object.getString("skye_driver_location").isEmpty()) {
+                                JSONObject driver_location = new JSONObject(object.getString("skye_driver_location"));
+                                String address = driver_location.getString("address");
+                                String latitude = driver_location.getString("latitude");
+                                String longitude = driver_location.getString("longitude");
+
+                                //to avoid app crash of empty string
+                                Intent mapIntent = new Intent(OrderActivity.this, MapsActivity.class);
+                                if (!address.isEmpty()) {
+                                    mapIntent.putExtra("address", address);
+                                    trackingAvailable = true;
+                                }
+                                if (!latitude.isEmpty() && !longitude.isEmpty()) {
+                                    mapIntent.putExtra("latitude", longitude);
+                                    mapIntent.putExtra("longitude", longitude);
+                                    trackingAvailable = true;
+                                }
+                                if (trackingAvailable)
+                                    startActivity(mapIntent);
+                            }
 
                             //for zorem shipment plugin
 
-                            if (shipment != null) {
-                                    Intent intent = new Intent(OrderActivity.this, BrowserActivity.class);
-                                    intent.putExtra("url", shipment.getString("ast_tracking_link"));
-                                    intent.putExtra("title", "Track Order");
-                                    startActivity(intent);
-
-                                    trackingAvailable = true;
-                                }
+//                            if (shipment != null) {
+//                                    Intent intent = new Intent(OrderActivity.this, BrowserActivity.class);
+//                                    intent.putExtra("url", shipment.getString("ast_tracking_link"));
+//                                    intent.putExtra("title", "Track Order");
+//                                    startActivity(intent);
+//
+//                                    trackingAvailable = true;
+//                                }
 
 
 

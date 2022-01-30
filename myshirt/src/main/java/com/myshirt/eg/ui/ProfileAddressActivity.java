@@ -138,6 +138,7 @@ public class ProfileAddressActivity extends AppCompatActivity {
             loader.hide();
         });
         RequestQueue rQueue = Volley.newRequestQueue(this);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -266,6 +267,7 @@ public class ProfileAddressActivity extends AppCompatActivity {
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(this);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }

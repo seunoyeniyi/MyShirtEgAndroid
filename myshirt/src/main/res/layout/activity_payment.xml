@@ -259,7 +259,7 @@
                     <LinearLayout
                         android:id="@+id/shippingLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/white_card_border"
                         android:orientation="vertical"
@@ -273,34 +273,23 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/shippingGroup"
+                        <com.myshirt.eg.ui.MyListView
+                            android:id="@+id/shipping_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:checkedButton="@id/flatRate">
+                            android:layout_marginTop="5dp"
+                            android:background="@color/white">
 
-                            <RadioButton
-                                android:id="@+id/flatRate"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/flat_rate"
-                                app:buttonTint="@color/primary" />
+                        </com.myshirt.eg.ui.MyListView>
 
-                            <RadioButton
-                                android:id="@+id/localPickup"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/local_pickup"
-                                app:buttonTint="@color/primary" />
-
-                            <RadioButton
-                                android:id="@+id/freeShipping"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/free_shipping"
-                                app:buttonTint="@color/primary" />
-
-                        </RadioGroup>
+                        <TextView
+                            android:id="@+id/no_shipping_method"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="No Shipping Method Found"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 

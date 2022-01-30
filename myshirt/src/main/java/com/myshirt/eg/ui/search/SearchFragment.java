@@ -85,6 +85,7 @@ public class SearchFragment extends Fragment {
     String product_tag = "";
     String category_name = "";
     String product_color = "";
+    String product_size = "";
 
     boolean applyPriceRange = false;
     List<Float> priceRange = null;
@@ -205,13 +206,14 @@ public class SearchFragment extends Fragment {
         filterSheetDialog.setOnCallback(new FilterSheetDialog.FilterSheetListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range) {
+            public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range, String size) {
                 productLists.clear();
                 product_tag = tag;
 
                 category_name = category;
 
                 product_color = color;
+                product_size = size;
 
                 applyPriceRange = applyPriceRangeX;
                 priceRange = range;
@@ -312,6 +314,10 @@ public class SearchFragment extends Fragment {
         if (product_color.length() > 0) {
             url += "&color=" + product_color;
         }
+
+//        if (product_size.length() > 0) {
+//            url += "&size=" + product_size;
+//        }
 
         if (applyPriceRange && priceRange != null) {
             url += "&price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1));

@@ -193,6 +193,7 @@ public class AddressActivity extends AppCompatActivity {
             dialog.show();
         });
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -294,6 +295,7 @@ public class AddressActivity extends AppCompatActivity {
             loader.hide();
         });
         RequestQueue rQueue = Volley.newRequestQueue(AddressActivity.this);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -422,7 +424,7 @@ public class AddressActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) { //response.toString() to get json as string
-                        Log.e("res:", response.toString());
+//                        Log.e("res:", response.toString());
                         //savings result
                         try {
                             JSONObject object = new JSONObject(response.toString());
@@ -452,6 +454,7 @@ public class AddressActivity extends AppCompatActivity {
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(AddressActivity.this);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }
@@ -509,6 +512,7 @@ public class AddressActivity extends AppCompatActivity {
                     });
 
                     RequestQueue rQueue = Volley.newRequestQueue(AddressActivity.this);
+                    postRequest.setShouldCache(false);
                     postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     rQueue.add(postRequest);
                 }

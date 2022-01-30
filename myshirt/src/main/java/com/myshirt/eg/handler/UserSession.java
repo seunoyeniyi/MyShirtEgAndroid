@@ -3,6 +3,7 @@ package com.myshirt.eg.handler;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import java.util.HashMap;
 
@@ -47,6 +48,7 @@ public class UserSession {
         return user;
     }
     public boolean logged() {
+//        Log.e("USER", preferences.getString("userID", null));
         return  preferences.getBoolean("logged", false);
     }
 

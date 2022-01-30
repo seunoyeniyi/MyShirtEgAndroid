@@ -219,6 +219,7 @@ public class OrdersFragment extends Fragment {
             refreshBtn.setVisibility(View.VISIBLE);
         });
         RequestQueue rQueue = Volley.newRequestQueue(requireContext());
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }

@@ -56,7 +56,7 @@
         android:layout_below="@id/contentLayout"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:fontFamily="@font/montserrat"
         android:text="ADD TO CART"
         app:backgroundTint="@color/secondary"

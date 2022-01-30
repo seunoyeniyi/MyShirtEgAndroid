@@ -197,6 +197,7 @@
                 android:background="@drawable/button_background_secondary_circle"
                 android:drawableLeft="@drawable/icons8_place_marker_1"
                 android:text="Track Order"
+                android:visibility="invisible"
                 app:backgroundTint="@color/shim_background" />
 
             <TextView

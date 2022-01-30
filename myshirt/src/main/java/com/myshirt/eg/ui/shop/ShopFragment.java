@@ -81,6 +81,7 @@ public class ShopFragment extends Fragment {
     String product_category = "";
     String product_tag = "";
     String product_color = "";
+    String product_size = "";
 
     UserSession userSession;
     String order_by = "title menu_order";
@@ -133,7 +134,7 @@ public class ShopFragment extends Fragment {
             filterSheetDialog = new FilterSheetDialog(getActivity());
             filterSheetDialog.setOnCallback(new FilterSheetDialog.FilterSheetListener() {
                 @Override
-                public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range) {
+                public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range, String size) {
                     productLists.clear();
                     applyPriceRange = applyPriceRangeX;
                     priceRange = range;
@@ -142,6 +143,7 @@ public class ShopFragment extends Fragment {
                     product_tag = tag;
 
                     product_color = color;
+                    product_size = size;
 
                     currentPaged = 1;
                     fetchData(getContext(), order_by, String.valueOf(currentPaged), true);
@@ -394,6 +396,10 @@ public class ShopFragment extends Fragment {
                 if (product_color.length() > 0) {
                     url += "&color=" + product_color;
                 }
+//            if (product_size.length() > 0) {
+//                url += "&size=" + product_size;
+//            }
+
 
                 if (applyPriceRange && this.priceRange != null) {
                         url = Site.SIMPLE_PRODUCTS + "?price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1)) + "&per_page=40&hide_description=1&show_variation=1" + "&user_id=" + userSession.userID + "&paged=" + paged;

@@ -15,12 +15,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,6 +46,8 @@ import com.myshirt.eg.MainActivity;
 import com.myshirt.eg.R;
 import com.myshirt.eg.Site;
 //import com.bgkmart.bgkmart.handler.PayPalConfig;
+import com.myshirt.eg.adapter.ShippingMethodList;
+import com.myshirt.eg.adapter.ShippingMethodsAdapter;
 import com.myshirt.eg.handler.PriceFormatter;
 import com.myshirt.eg.handler.UserSession;
 
@@ -56,6 +61,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class PaymentActivity extends AppCompatActivity {
@@ -70,8 +76,10 @@ public class PaymentActivity extends AppCompatActivity {
     Button confirmBtn, applyCouponBtn;
 //    String paymentAmount = "0";
     LinearLayout shippingLayout;
-    RadioButton flatRate, localPickup, freeShipping;
-    RadioGroup shippingGroup;
+    TextView shippingMethodStatus;
+    MyListView shippingListView;
+    ArrayList<ShippingMethodList> shippingMethodLists = new ArrayList<>();
+    ShippingMethodsAdapter shippingMethodsAdapter;
 
     //PAYPAL
 //    public static final String clientKey = "Aejdh4qkj0Kexwygz279msd3ac1BW8Suur42NIVNCZcnJ0lMMUHFtI11nTaR3SRy3i6Mfq_g7vfC6A-9";
@@ -125,30 +133,20 @@ public class PaymentActivity extends AppCompatActivity {
         rewardLayout.setVisibility(View.GONE);
 
         shippingLayout = (LinearLayout) findViewById(R.id.shippingLayout);
-        flatRate = (RadioButton) findViewById(R.id.flatRate);
-        localPickup = (RadioButton) findViewById(R.id.localPickup);
-        freeShipping = (RadioButton) findViewById(R.id.freeShipping);
-        shippingGroup = (RadioGroup) findViewById(R.id.shippingGroup);
+        shippingMethodStatus = (TextView) findViewById(R.id.no_shipping_method);
+        shippingMethodStatus.setVisibility(View.INVISIBLE);
 
-        shippingGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                switch (checkedId) {
-                    case R.id.flatRate:
-                        changeShippingMethod("flat_rate");
-                        break;
-                    case R.id.localPickup:
-                        changeShippingMethod("local_pickup");
-                        break;
-                    case R.id.freeShipping:
-                        changeShippingMethod("free_shipping");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        shippingListView = (MyListView) findViewById(R.id.shipping_list);
+        shippingMethodsAdapter = new ShippingMethodsAdapter(this, shippingMethodLists);
+        shippingListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        shippingListView.setAdapter(shippingMethodsAdapter);
+
+       shippingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               changeShippingMethod(shippingMethodLists.get(i).getId());
+           }
+       });
 
         confirmBtn.setOnClickListener(confirmClicked);
         applyCouponBtn.setOnClickListener(new View.OnClickListener() {
@@ -221,6 +219,7 @@ public class PaymentActivity extends AppCompatActivity {
             dialog.show();
         });
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -255,31 +254,27 @@ public class PaymentActivity extends AppCompatActivity {
                         rewardLayout.setVisibility(View.GONE);
                     }
                     if (object.getString("has_shipping").equals("true")) {
-                        JSONObject shipping_methods = object.getJSONObject("shipping_methods");
-                        if (shipping_methods.has("flat_rate")) {
-                            JSONObject flat_rate = shipping_methods.getJSONObject("flat_rate");
-                            flatRate.setVisibility(View.VISIBLE);
-                            flatRate.setText(Html.fromHtml(flat_rate.getString("title") + " <b>" + Site.CURRENCY +  flat_rate.getString("cost") + "</b>"));
-                        } else {flatRate.setVisibility(View.GONE);}
 
-                        if (shipping_methods.has("local_pickup")) {
-                            JSONObject local_pickup = shipping_methods.getJSONObject("local_pickup");
-                            localPickup.setVisibility(View.VISIBLE);
-                            localPickup.setText(Html.fromHtml(local_pickup.getString("title") + " <b>" + Site.CURRENCY +  local_pickup.getString("cost") + "</b>"));
-                        } else {localPickup.setVisibility(View.GONE);}
+                        JSONArray shipping_methods = object.getJSONArray("shipping_methods"); //Skye API V2
 
-                        if (shipping_methods.has("free_shipping")) {
-                            JSONObject free_shipping = shipping_methods.getJSONObject("free_shipping");
-                            freeShipping.setVisibility(View.VISIBLE);
-                            freeShipping.setText(Html.fromHtml(free_shipping.getString("title")));
-                        } else {freeShipping.setVisibility(View.GONE);}
-
-                        //auto select the shipping method of which user has eg database
-                        if (object.has("shipping_method")) {
-                            flatRate.setChecked(object.getString("shipping_method").equals("flat_rate"));
-                            localPickup.setChecked(object.getString("shipping_method").equals("local_pickup"));
-                            freeShipping.setChecked(object.getString("shipping_method").equals("free_shipping"));
+                        for (int i = 0; i < shipping_methods.length(); i++) {
+                            JSONObject method = shipping_methods.getJSONObject(i);
+                            shippingMethodLists.add(new ShippingMethodList(method.getString("title"), method.getString("rate_id"), method.getString("cost")));
                         }
+
+                        shippingMethodsAdapter = new ShippingMethodsAdapter(this, shippingMethodLists);
+                        shippingListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+                        shippingListView.setAdapter(shippingMethodsAdapter);
+
+
+                        if (shippingMethodLists.size() > 0) {
+                            shippingListView.setItemChecked(0, true);
+                            shippingMethodStatus.setVisibility(View.GONE);
+                        } else {
+                            shippingMethodStatus.setVisibility(View.VISIBLE);
+                        }
+
+
 
                     } else {
                         shippingLayout.setVisibility(View.GONE);
@@ -348,6 +343,7 @@ public class PaymentActivity extends AppCompatActivity {
             loader.hide();
         });
         RequestQueue rQueue = Volley.newRequestQueue(PaymentActivity.this);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -464,8 +460,8 @@ public class PaymentActivity extends AppCompatActivity {
                                 JSONObject info = new JSONObject(object.getString("info"));
                                 String checkout_url = info.getString("checkout_payment_url").replace("localhost", Site.DOMAIN);
                                 checkout_url += "&sk-web-payment=1&sk-user-checkout=" + userSession.userID;
-                                checkout_url += "&in_sk_app=1";
-                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button";
+//                                checkout_url += "&in_sk_app=1";
+//                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button";
                                 startActivity(new Intent(PaymentActivity.this, StripeWebPay.class)
                                         .putExtra("url", checkout_url));
                                 finish();
@@ -480,8 +476,8 @@ public class PaymentActivity extends AppCompatActivity {
                                 JSONObject info = new JSONObject(object.getString("info"));
                                 String checkout_url = info.getString("checkout_payment_url").replace("localhost", Site.DOMAIN);
                                 checkout_url += "&sk-web-payment=1&sk-stripe-checkout=1&sk-user-checkout=" + userSession.userID;
-                                checkout_url += "&in_sk_app=1";
-                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button";
+//                                checkout_url += "&in_sk_app=1";
+//                                checkout_url += "&hide_elements=div*topbar.topbar, div.joinchat__button";
                                 startActivity(new Intent(PaymentActivity.this, StripeWebPay.class)
                                         .putExtra("url", checkout_url));
                                 finish();
@@ -575,6 +571,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(PaymentActivity.this);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }
@@ -617,6 +614,7 @@ public class PaymentActivity extends AppCompatActivity {
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(PaymentActivity.this);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }

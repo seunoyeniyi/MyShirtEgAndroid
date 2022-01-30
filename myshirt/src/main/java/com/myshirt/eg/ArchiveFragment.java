@@ -83,6 +83,7 @@ public class ArchiveFragment extends Fragment {
     int currentPaged = 1;
 
     String product_color = "";
+    String product_size = "";
 
     boolean applyPriceRange = false;
     List<Float> priceRange = null;
@@ -214,7 +215,7 @@ public class ArchiveFragment extends Fragment {
         filterSheetDialog.setOnCallback(new FilterSheetDialog.FilterSheetListener() {
             @SuppressLint("SetTextI18n")
             @Override
-            public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range) {
+            public void onApplyClicked(String category, String tag, String color, boolean applyPriceRangeX, List<Float> range, String size) {
                 productLists.clear();
                 product_tag = tag;
                 if (category.length() > 0) { //for archive page only
@@ -228,6 +229,7 @@ public class ArchiveFragment extends Fragment {
                 priceRange = range;
 
                 product_color = color;
+                product_size = size;
 
                 currentPaged = 1;
                 fetchData(requireContext(), String.valueOf(currentPaged), true);
@@ -321,6 +323,10 @@ public class ArchiveFragment extends Fragment {
             url += "&color=" + product_color;
         }
 
+//        if (product_size.length() > 0) {
+//            url += "&size=" + product_size;
+//        }
+
         if (applyPriceRange && priceRange != null) {
             url += "&price_range=" + String.valueOf(priceRange.get(0)) + "|" + String.valueOf(priceRange.get(1));
         }
@@ -388,6 +394,7 @@ public class ArchiveFragment extends Fragment {
             }
         };
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }

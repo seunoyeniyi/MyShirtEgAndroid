@@ -467,6 +467,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
             refreshBtn.setVisibility(View.VISIBLE);
         });
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(request);
     }
@@ -870,6 +871,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }
@@ -893,6 +895,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }
@@ -941,6 +944,7 @@ public class ProductFragment extends Fragment implements AttributesListAdapter.A
             }
         });
         RequestQueue rQueue = Volley.newRequestQueue(requireActivity().getApplicationContext());
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }

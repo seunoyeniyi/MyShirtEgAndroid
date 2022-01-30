@@ -180,6 +180,7 @@
         android:layout_marginRight="10dp"
         android:fontFamily="@font/montserrat"
         android:text="ADD TO CART"
+        android:textSize="12sp"
         app:backgroundTint="@color/secondary"
         app:cornerRadius="0dp" />
 

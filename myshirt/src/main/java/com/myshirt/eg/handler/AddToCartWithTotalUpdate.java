@@ -82,6 +82,7 @@ public class AddToCartWithTotalUpdate {
         });
 
         RequestQueue rQueue = Volley.newRequestQueue(context);
+        postRequest.setShouldCache(false);
         postRequest.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         rQueue.add(postRequest);
     }

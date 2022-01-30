@@ -336,6 +336,8 @@ public class HomeFragment extends Fragment {
 //                return super.parseNetworkError(volleyError);
 //            }
 //        };
+
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }

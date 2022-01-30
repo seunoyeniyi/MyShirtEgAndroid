@@ -17,6 +17,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,13 +65,16 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
     ArrayList<CategoriesList> categories;
     ArrayList<TagsList> tags;
     ArrayList<AttributeTermList> colors;
+    ArrayList<AttributeTermList> sizes;
+
     List<String> categoriesString;
     List<String> tagsString;
     List<String> colorsString;
+    List<String> sizesString;
 
     RangeSlider priceRange;
-    Spinner catSpinner, tagSpinner, colorSpinner;
-    ProgressBar catProgress, tagProgress, colorProgress;
+    Spinner catSpinner, tagSpinner, colorSpinner, sizeSpinner;
+    ProgressBar catProgress, tagProgress, colorProgress, sizeProgress;
     TextView priceRangeTextView;
     MyListView brandsListView;
     ArrayList<BrandList> brandLists = new ArrayList<>();
@@ -82,6 +86,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
     String selected_category = "";
     String selected_tag = "";
     String selected_color = "";
+    String selected_size = "";
 
     FilterSheetListener callback;
 
@@ -109,10 +114,12 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
         catSpinner = (Spinner) root.findViewById(R.id.categoriesSortSpinner);
         tagSpinner = (Spinner) root.findViewById(R.id.tagsSortSpinner);
         colorSpinner = (Spinner) root.findViewById(R.id.colorsSortSpinner);
+        sizeSpinner = (Spinner) root.findViewById(R.id.sizesSortSpinner);
 
         catProgress = (ProgressBar) root.findViewById(R.id.categories_progress);
         tagProgress = (ProgressBar) root.findViewById(R.id.tags_progress);
         colorProgress = (ProgressBar) root.findViewById(R.id.colors_progress);
+        sizeProgress = (ProgressBar) root.findViewById(R.id.sizes_progress);
 
         priceRangeTextView = (TextView) root.findViewById(R.id.price_range_text);
 
@@ -129,18 +136,21 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
         catProgress.setVisibility(View.GONE);
         tagProgress.setVisibility(View.GONE);
         colorProgress.setVisibility(View.GONE);
+        sizeProgress.setVisibility(View.GONE);
 
         //don't fetch again if already fetched
         boolean areNull = false;
-        if (categories == null ||  tags == null ||  colors == null) {
+        if (categories == null ||  tags == null ||  colors == null ||  sizes == null) {
             areNull = true;
             categories = new ArrayList<>();
             tags = new ArrayList<>();
             colors = new ArrayList<>();
+            sizes = new ArrayList<>();
 
             categoriesString = new ArrayList<String>();
             tagsString = new ArrayList<String>();
             colorsString = new ArrayList<String>();
+            sizesString = new ArrayList<String>();
 
             //for categories spinner
             categoriesString.add("Select a category"); //default
@@ -153,6 +163,10 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
             //for colors spinner
             colorsString.add("Any color"); //default
             colors.add(new AttributeTermList("Any color",  "", "")); //default
+
+            //for sizes spinner
+            sizesString.add("Any size"); //default
+            sizes.add(new AttributeTermList("Any size",  "", "")); //default
         }
 
             //cat spinner
@@ -170,11 +184,17 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
             colorSortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
             colorSpinner.setAdapter(colorSortAdapter);
 
+            //size spinner
+            ArrayAdapter<String> sizeSortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, sizesString);
+            sizeSortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
+            sizeSpinner.setAdapter(sizeSortAdapter);
+
 
             if (areNull) {
                 fetchCategories();
                 fetchTags();
                 fetchColors();
+                fetchSizes();
             }
 
 
@@ -209,6 +229,15 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+        sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selected_size = sizes.get(i).getSlug();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
 
 
         Button applyFilter = (Button) root.findViewById(R.id.applyFilter);
@@ -220,7 +249,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
                     boolean applyPriceRange = (range.get(0) != initialLower || range.get(1) != initialUpper); //if initial price has changed
 
                     if (callback != null) {
-                        callback.onApplyClicked(selected_category, selected_tag, selected_color, applyPriceRange, range);
+                        callback.onApplyClicked(selected_category, selected_tag, selected_color, applyPriceRange, range, selected_size);
                     }
                     dismiss();
                 }
@@ -286,50 +315,97 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
         requestQueue.add(request);
     }
     public void fetchTags() {
-        tagProgress.setVisibility(View.VISIBLE);
-
-        String url = Site.TAGS  + "?hide_empty=1&order_by=menu_order";
-
-        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onResponse(String response) {
-                if(context == null || !isAdded()){
-                    return; //to avoid crash
-                }
-                try {
-                    JSONArray array = new JSONArray(response);
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject tag = array.getJSONObject(i);
-                        tags.add(new TagsList(tag.getString("name"), tag.getString("slug")));
-                        tagsString.add(tag.getString("name"));
-                    }
-
-                    ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, tagsString);
-                    sortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
-                    tagSpinner.setAdapter(sortAdapter);
-                    tagProgress.setVisibility(View.GONE);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, (VolleyError error) -> {
-            if(context == null || !isAdded()){
-                return; //to avoid crash
-            }
-            //handle error
-            Toast.makeText(context, "Can't get tags.", Toast.LENGTH_LONG).show();
-            tagProgress.setVisibility(View.GONE);
-        });
-        RequestQueue requestQueue =  Volley.newRequestQueue(requireContext());
-        request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(request);
+        tagProgress.setVisibility(View.GONE);
+//        tagProgress.setVisibility(View.VISIBLE);
+//
+//        String url = Site.TAGS  + "?hide_empty=1&order_by=menu_order";
+//
+//        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//            @Override
+//            public void onResponse(String response) {
+//                if(context == null || !isAdded()){
+//                    return; //to avoid crash
+//                }
+//                try {
+//                    JSONArray array = new JSONArray(response);
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject tag = array.getJSONObject(i);
+//                        tags.add(new TagsList(tag.getString("name"), tag.getString("slug")));
+//                        tagsString.add(tag.getString("name"));
+//                    }
+//
+//                    ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, tagsString);
+//                    sortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
+//                    tagSpinner.setAdapter(sortAdapter);
+//                    tagProgress.setVisibility(View.GONE);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, (VolleyError error) -> {
+//            if(context == null || !isAdded()){
+//                return; //to avoid crash
+//            }
+//            //handle error
+//            Toast.makeText(context, "Can't get tags.", Toast.LENGTH_LONG).show();
+//            tagProgress.setVisibility(View.GONE);
+//        });
+//        RequestQueue requestQueue =  Volley.newRequestQueue(requireContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
     }
     public void fetchColors() {
-        colorProgress.setVisibility(View.VISIBLE);
+        colorProgress.setVisibility(View.GONE);
+//        colorProgress.setVisibility(View.VISIBLE);
+//
+//        String url = Site.ATTRIBUTES  + "?name=color";
+//
+//
+//        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//            @Override
+//            public void onResponse(String response) {
+//                if(context == null || !isAdded()){
+//                    return; //to avoid crash
+//                }
+//                try {
+//                    JSONObject object = new JSONObject(response);
+//                    JSONArray array = object.getJSONArray("terms");
+//
+//                    for (int i = 0; i < array.length(); i++) {
+//                        JSONObject term = array.getJSONObject(i);
+//                        colors.add(new AttributeTermList(term.getString("name"), term.getString("taxonomy"), term.getString("slug")));
+//                        colorsString.add(term.getString("name"));
+//                    }
+//
+//                    ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, colorsString);
+//                    sortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
+//                    colorSpinner.setAdapter(sortAdapter);
+//                    colorProgress.setVisibility(View.GONE);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, (VolleyError error) -> {
+//            if(context == null || !isAdded()){
+//                return; //to avoid crash
+//            }
+//            //handle error
+//            Toast.makeText(context, "Can't get colors.", Toast.LENGTH_LONG).show();
+//            colorProgress.setVisibility(View.GONE);
+//        });
+//        RequestQueue requestQueue =  Volley.newRequestQueue(requireContext());
+//        request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        requestQueue.add(request);
+    }
+    public void fetchSizes() {
 
-        String url = Site.ATTRIBUTES  + "?name=color";
+        sizeProgress.setVisibility(View.VISIBLE);
+
+        String url = Site.ATTRIBUTES  + "?name=size";
 
 
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -340,19 +416,20 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
                     return; //to avoid crash
                 }
                 try {
+                    Log.e("RES", response);
                     JSONObject object = new JSONObject(response);
                     JSONArray array = object.getJSONArray("terms");
 
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject term = array.getJSONObject(i);
-                        colors.add(new AttributeTermList(term.getString("name"), term.getString("taxonomy"), term.getString("slug")));
-                        colorsString.add(term.getString("name"));
+                        sizes.add(new AttributeTermList(term.getString("name"), term.getString("taxonomy"), term.getString("slug")));
+                        sizesString.add(term.getString("name"));
                     }
 
-                    ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, colorsString);
+                    ArrayAdapter<String> sortAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown_item_shop, sizesString);
                     sortAdapter.setDropDownViewResource(R.layout.spinner_dropdown_menu_item);
-                    colorSpinner.setAdapter(sortAdapter);
-                    colorProgress.setVisibility(View.GONE);
+                    sizeSpinner.setAdapter(sortAdapter);
+                    sizeProgress.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -363,8 +440,8 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
                 return; //to avoid crash
             }
             //handle error
-            Toast.makeText(context, "Can't get colors.", Toast.LENGTH_LONG).show();
-            colorProgress.setVisibility(View.GONE);
+            Toast.makeText(context, "Can't get sizes.", Toast.LENGTH_LONG).show();
+            sizeProgress.setVisibility(View.GONE);
         });
         RequestQueue requestQueue =  Volley.newRequestQueue(requireContext());
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
@@ -406,7 +483,7 @@ public class FilterSheetDialog extends BottomSheetDialogFragment {
     }
 
     public interface FilterSheetListener  {
-        public void onApplyClicked(String category, String tag, String selected_color, boolean applyPriceRange, List<Float> range);
+        public void onApplyClicked(String category, String tag, String selected_color, boolean applyPriceRange, List<Float> range, String selected_size);
     }
 }
 

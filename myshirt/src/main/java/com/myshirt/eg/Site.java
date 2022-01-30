@@ -15,10 +15,10 @@ public class Site {
     public static final String REGISTER = ADDRESS + "wp-json/skye-api/v1/register/";
     public static final String USER = ADDRESS + "wp-json/skye-api/v1/user-info/";
     public static final String UPDATE_USER = ADDRESS + "wp-json/skye-api/v1/update-user-info/";
-    public static final String UPDATE_SHIPPING = ADDRESS + "wp-json/skye-api/v1/update-user-shipping-address/";
+    public static final String UPDATE_SHIPPING = ADDRESS + "wp-json/skye-api/v2/update-user-shipping-address/"; //v2
     public static final String CREATE_ORDER = ADDRESS + "wp-json/skye-api/v1/create-order/";
     public static final String UPDATE_COUPON = ADDRESS + "wp-json/skye-api/v1/update-cart-coupon/";
-    public static final String CHANGE_CART_SHIPPING = ADDRESS + "wp-json/skye-api/v1/change-cart-shipping-method/";
+    public static final String CHANGE_CART_SHIPPING = ADDRESS + "wp-json/skye-api/v2/change-cart-shipping-method/"; //v2
     public static final String ORDERS = ADDRESS + "wp-json/skye-api/v1/orders/";
     public static final String ORDER = ADDRESS + "wp-json/skye-api/v1/order/";
     public static final String UPDATE_ORDER = ADDRESS + "wp-json/skye-api/v1/update-order/";
@@ -56,6 +56,18 @@ public class Site {
                 break;
             case "stripe_cc":
                 title = "Credit Cards";
+                break;
+            case "accept-kiosk":
+                title = "Aman";
+                break;
+            case "accept-wallet":
+                title = "Mobile Wallet";
+                break;
+            case "accept-sympl":
+                title = "Sympl";
+                break;
+            case "accept-online":
+                title = "Visa/MasterCard";
                 break;
             default:
                 title = "No Payment method";

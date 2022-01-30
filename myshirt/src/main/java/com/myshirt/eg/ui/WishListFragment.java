@@ -184,6 +184,7 @@ public class WishListFragment extends Fragment {
             refreshBtn.setVisibility(View.VISIBLE);
             noQuery.setVisibility(View.VISIBLE);
         });
+        request.setShouldCache(false);
         request.setRetryPolicy(new DefaultRetryPolicy(15000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(request);
     }

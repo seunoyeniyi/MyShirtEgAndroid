@@ -10,5 +10,8 @@
     android:padding="10dp"
     android:text="Name"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="#3A3A3A"
+    android:textColor="@color/black"
+    android:textColorHighlight="@color/primary"
+    android:textColorHint="@color/black"
+    android:textColorLink="@color/black"
     android:textSize="14sp" />
